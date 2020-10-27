@@ -11,4 +11,3 @@ function jPath($str) {
 }
 $paths = json_decode(file_get_contents(jPath("config/paths.json")));
 include jPath("bin/routing.php");
-include jPath("bin/styling.php");

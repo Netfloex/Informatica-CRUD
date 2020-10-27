@@ -1,0 +1,9 @@
+@import "src/now-ui-kit.scss";
+@import "src/bootstrap.min";
+body {
+    height: 1000vh;
+}
+.page-header-image {
+    background: linear-gradient(#838689,#111214);
+    background-image: url('/img/achtergrond.png');
+}
