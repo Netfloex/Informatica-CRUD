@@ -1,0 +1,6 @@
+{
+    "views": "views",
+    "public": "public",
+    "stylesInput": "less/index.less",
+    "stylesOutput": "css/app.css"
+}

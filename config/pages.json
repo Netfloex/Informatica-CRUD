@@ -1,0 +1,13 @@
+{
+    "/": {
+        "title": "Main",
+        "doc": "index"
+    },
+    "ewa": {
+        "title": "Jo gamer"
+    },
+    "notFound": {
+        "title": "404, not found",
+        "doc": "404"
+    }
+}
