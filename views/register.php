@@ -1,9 +1,26 @@
+<?php
+function errorClass($type) {
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == $type) {
+            return "uk-form-danger";
+        }
+    }
+}
+function errorMsg($type) {
+    if (isset($_GET["error"]) || isset($_GET["msg"])) {
+        if ($_GET["error"] == $type) {
+            return "<span class=\"uk-text-danger\">" . ucfirst($type) . " " . $_GET["msg"] . "</span>";
+        }
+    }
+}
+jsDump($_SERVER);
+?>
 <div class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport>
     <div class="uk-width-1-1">
         <div class="uk-container">
             <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
                 <div class="uk-width-1-1@m">
-                    <form
+                    <form method="POST" action="/php/register.php"
                         class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
                         <ul class="uk-tab uk-flex-center">
                             <li class="uk-active">
@@ -18,24 +35,34 @@
                             <div class="uk-margin">
                                 <div class="uk-inline uk-width-1-1">
                                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                    <input class="uk-input uk-form-large" type="text" placeholder="First and last name">
+                                    <input required name="username"
+                                        class="uk-input uk-form-large <?= errorClass("username"); ?>" type="text"
+                                        placeholder="Username">
+                                    <?= errorMsg("username") ?>
                                 </div>
                             </div>
                             <div class="uk-margin">
                                 <div class="uk-inline uk-width-1-1">
                                     <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                                    <input class="uk-input uk-form-large" type="text" placeholder="Email address">
+                                    <input required name="email"
+                                        class="uk-input uk-form-large <?= errorClass("email"); ?>" type="text"
+                                        placeholder="Email address">
+                                    <?= errorMsg("email") ?>
                                 </div>
                             </div>
                             <div class="uk-margin">
                                 <div class="uk-inline uk-width-1-1">
                                     <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                                    <input class="uk-input uk-form-large" type="password" placeholder="Set a password">
+                                    <input required name="password"
+                                        class="uk-input uk-form-large <?= errorClass("password"); ?>" type="password"
+                                        placeholder="Set a password">
+                                    <?= errorMsg("password") ?>
+
                                 </div>
                             </div>
                             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                 <label>
-                                    <input class="uk-checkbox" type="checkbox"> I agree the Terms and
+                                    <input required class="uk-checkbox" type="checkbox"> I agree the Terms and
                                     Conditions.
                                 </label>
                             </div>

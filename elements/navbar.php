@@ -1,6 +1,7 @@
 <!-- Adapted from https://demos.creative-tim.com/now-ui-kit/examples/landing-page.html -->
-<nav class="navbar navbar-expand-lg bg-primary fixed-top <?php if ($doc == "index"):?>navbar-transparent "
-    color-on-scroll="400" <?php endif;?>>
+<nav class="navbar navbar-expand-lg bg-primary fixed-top 
+<?php if ($doc == "index") : ?>
+    navbar-transparent " color-on-scroll="400" <?php else : ?>" <?php endif; ?>>
     <div class=" container">
         <div class="dropdown button-dropdown">
             <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
