@@ -1,6 +1,10 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $secrets = json_decode(file_get_contents("/var/www/Informatica-CRUD/database/credentials.json"));
 $connection = new mysqli($secrets->host, $secrets->username, $secrets->passwd, $secrets->dbname);
+$is_logged_in = $_SESSION["account"] != null;
 
 if ($connection->connect_error) {
     die("Error connecting database: $connection->connect_error");
@@ -62,4 +66,18 @@ function user_page($user) {
         }');
     }
     return $page;
+}
+
+function logged_on($account) {
+    global $is_logged_in;
+    $_SESSION["account"] = $account;
+    $is_logged_in = true;
+    redirect_if_logged_in();
+}
+
+function redirect_if_logged_in() {
+    global $is_logged_in;
+    if ($is_logged_in) {
+        header("Location: /u/{$_SESSION['account']['username']}");
+    }
 }

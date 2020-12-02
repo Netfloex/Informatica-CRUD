@@ -1,3 +1,6 @@
+<?php
+redirect_if_logged_in();
+?>
 <div class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport>
     <div class="uk-width-1-1">
         <div class="uk-container">

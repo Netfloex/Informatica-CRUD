@@ -12,7 +12,7 @@ $password = $_POST["password"];
 if (check_exist("email", $email)) {
     $account = account_from("email", $email);
     if (password_verify($password, $account["password"])) {
-        header("Location: /u/{$account['username']}");
+        logged_on($account);
     } else {
         goBack("password", "is incorrect");
     }
