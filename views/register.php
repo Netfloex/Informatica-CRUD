@@ -1,20 +1,3 @@
-<?php
-function errorClass($type) {
-    if (isset($_GET["error"])) {
-        if ($_GET["error"] == $type) {
-            return "uk-form-danger";
-        }
-    }
-}
-function errorMsg($type) {
-    if (isset($_GET["error"]) || isset($_GET["msg"])) {
-        if ($_GET["error"] == $type) {
-            return "<span class=\"uk-text-danger\">" . ucfirst($type) . " " . $_GET["msg"] . "</span>";
-        }
-    }
-}
-jsDump($_SERVER);
-?>
 <div class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport>
     <div class="uk-width-1-1">
         <div class="uk-container">

@@ -1,11 +1,13 @@
-.page-header {
-    &-image {
-        background      : linear-gradient(#838689, #111214);
-        background-image: url('/img/achtergrond.png');
-        z-index         : 0 !important;
-    }
+.index {
+    .page-header {
+        &-image {
+            background      : linear-gradient(#838689, #111214);
+            background-image: url('/img/achtergrond.png');
+            z-index         : 0 !important;
+        }
 
-    h1.title {
-        color: white;
+        h1.title {
+            color: white;
+        }
     }
 }

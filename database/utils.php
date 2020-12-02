@@ -26,10 +26,9 @@ function checkIfSet(array $array) {
         }
     }
 }
-function check_unique($type, $var) {
-
+function account_from($type, $var) {
     global $connection;
-    $sql = $connection->prepare("SELECT $type FROM accounts WHERE $type=?");
+    $sql = $connection->prepare("SELECT * FROM accounts WHERE $type=?");
     if ($sql == false) {
         die("<br>$type kan niet uit accounts worden gehaald: var is: $var");
     }
@@ -37,9 +36,10 @@ function check_unique($type, $var) {
     $sql->execute();
 
     $result = $sql->get_result();
-    $fetch = $result->fetch_assoc();
-
-    return !isset($fetch);
+    return $result->fetch_assoc();
+}
+function check_exist($type, $var) {
+    return account_from($type, $var) != null;
 }
 function register($email, $username, $password) {
     global $connection;
@@ -50,7 +50,7 @@ function register($email, $username, $password) {
 }
 
 function user_page($user) {
-    if (!check_unique("username", $user)) {
+    if (check_exist("username", $user)) {
         $page = json_decode('{
             "title": "' . $user . '",
             "doc": "profilepage"

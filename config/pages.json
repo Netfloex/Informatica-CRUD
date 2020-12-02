@@ -12,5 +12,8 @@
     },
     "login": {
         "title": "Login"
+    },
+    "img/achtergrond.png": {
+        "doc": "achtergrond"
     }
 }

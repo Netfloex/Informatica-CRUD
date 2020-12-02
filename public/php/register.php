@@ -11,8 +11,8 @@ $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-if (check_unique("email", $email)) {
-    if (check_unique("username", $username)) {
+if (!check_exist("email", $email)) {
+    if (!check_exist("username", $username)) {
         register($email, $username, $password);
         header("Location: /u/$username");
     } else {

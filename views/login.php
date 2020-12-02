@@ -3,7 +3,7 @@
         <div class="uk-container">
             <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
                 <div class="uk-width-1-1@m">
-                    <form
+                    <form method="POST" action="/php/login.php"
                         class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
                         <ul class="uk-tab uk-flex-center">
                             <li>
@@ -18,13 +18,17 @@
                             <div class="uk-margin">
                                 <div class="uk-inline uk-width-1-1">
                                     <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                                    <input class="uk-input uk-form-large" type="text" placeholder="Email address">
+                                    <input class="uk-input uk-form-large <?= errorClass("email"); ?>" type="text"
+                                        name="email" placeholder="Email address">
+                                    <?= errorMsg("email"); ?>
                                 </div>
                             </div>
                             <div class="uk-margin">
                                 <div class="uk-inline uk-width-1-1">
                                     <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                                    <input class="uk-input uk-form-large" type="password" placeholder="Password">
+                                    <input class="uk-input uk-form-large <?= errorClass("password"); ?>" name="password"
+                                        type="password" placeholder="Password">
+                                    <?= errorMsg("password"); ?>
                                 </div>
                             </div>
                             <div class="uk-margin">
