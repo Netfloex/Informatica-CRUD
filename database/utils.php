@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 $secrets = json_decode(file_get_contents("/var/www/Informatica-CRUD/database/credentials.json"));
 $connection = new mysqli($secrets->host, $secrets->username, $secrets->passwd, $secrets->dbname);
-$is_logged_in = $_SESSION["account"] != null;
+$is_logged_in = isset($_SESSION["account"]);
 
 if ($connection->connect_error) {
     die("Error connecting database: $connection->connect_error");
@@ -62,7 +62,7 @@ function user_page($user) {
     } else {
         $page = json_decode('{
             "title": "404, This user was not found.",
-            "doc": "profilepage"
+            "doc": "404"
         }');
     }
     return $page;

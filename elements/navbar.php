@@ -32,12 +32,20 @@
         <div class="collapse navbar-collapse justify-content-end" id="navigation"
             data-nav-image="../assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
+                <?php if ($is_logged_in) : ?>
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                        href="/u/<?= $_SESSION["account"]["username"] ?>"><?= $_SESSION["account"]["username"] ?></a>
+                </li>
+                <?php else : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
