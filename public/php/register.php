@@ -1,24 +1,24 @@
 <?php
 include "../../database/utils.php";
 header('Content-Type: application/json');
-checkIfSet([
+$db->checkIfSet([
     "username",
     "email",
     "password"
-]);
+], false);
 
 $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-if (!check_exist("email", $email)) {
-    if (!check_exist("username", $username)) {
-        register($email, $username, $password);
-        $account = account_from("username", $username);
-        logged_on($account);
+if (!$db->check_exist("email", $email)) {
+    if (!$db->check_exist("username", $username)) {
+        $db->register($email, $username, $password);
+        $account = $db->account_from("username", $username);
+        $db->logged_on($account);
     } else {
-        goBack("username", "is al in gebruik.");
+        $db->goBack("username", "is al in gebruik.");
     }
 } else {
-    goBack("email",  "is al in gebruik.");
+    $db->goBack("email",  "is al in gebruik.");
 }

@@ -1,5 +1,5 @@
 <?php
-$view_account = account_from("username", $req);
+$view_account = $db->account_from("username", $req);
 ?>
 <div class="page">
     <section class="uk-section uk-section-small">
@@ -9,10 +9,15 @@ $view_account = account_from("username", $req);
                     <img src="https://unsplash.it/seed/<?= $view_account["username"] ?>/80/80/" alt=""
                         class="uk-border-circle">
                 </div>
-                <div class="uk-width-expand">
+                <div class="uk-width-auto">
                     <h4 class="uk-margin-remove uk-text-bold"><?= $view_account["username"] ?></h4>
                     <span class="uk-text-small uk-text-muted"><?= $view_account["email"] ?></span>
                 </div>
+                <?php if ($is_logged_in && $view_account["id"] == $_SESSION["account"]["id"]) : ?>
+                <div class="uk-width-expand">
+                    <a href="/profile" class="uk-button">Edit Profile</a>
+                </div>
+                <?php endif; ?>
                 <div class="uk-width-auto">
                     <div class="uk-inline">
                         <a href="#" class="uk-icon-button uk-icon" data-uk-icon="icon:more-vertical"
@@ -37,4 +42,13 @@ $view_account = account_from("username", $req);
     <div class="uk-container uk-container-small">
         <hr class="uk-margin-remove">
     </div>
+    <ul>
+        <?php
+        foreach ($view_account as $key => $item) :
+        ?>
+        <li>
+            <?= $key . ": " . $item ?>
+        </li>
+        <?php endforeach; ?>
+    </ul>
 </div>

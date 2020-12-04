@@ -1,7 +1,7 @@
 <?php
 $pages = json_decode(file_get_contents(jPath("config/pages.json")));
 $req = $_SERVER["REQUEST_URI"];
-include jPath("database/utils.php");
+require jPath("database/utils.php");
 
 if (strlen($req) > 1) {
     $req = preg_replace("/^\//", "", $req);
@@ -10,7 +10,7 @@ if (strlen($req) > 1) {
 
 if (preg_match("/^u\//", $req) == 1) { // Pagina die begint met "u/" -> Profiel Pagina
     $req = preg_replace("/^u\//", "", $req);
-    $page = user_page($req);
+    $page = $db->user_page($req);
 } else if (isset($pages->$req)) {
     $page = $pages->$req;
 } else {

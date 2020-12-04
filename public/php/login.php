@@ -2,20 +2,20 @@
 include "../../database/utils.php";
 header('Content-Type: application/json');
 
-checkIfSet([
+$db->checkIfSet([
     "email",
     "password"
-]);
+], false);
 $email = $_POST["email"];
 
 $password = $_POST["password"];
-if (check_exist("email", $email)) {
-    $account = account_from("email", $email);
+if ($db->check_exist("email", $email)) {
+    $account = $db->account_from("email", $email);
     if (password_verify($password, $account["password"])) {
-        logged_on($account);
+        $db->logged_on($account);
     } else {
-        goBack("password", "is incorrect");
+        $db->goBack("password", "is incorrect");
     }
 } else {
-    goBack("email", "is incorrect");
+    $db->goBack("email", "is incorrect");
 }

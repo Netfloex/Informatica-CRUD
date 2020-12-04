@@ -15,5 +15,9 @@
     },
     "img/achtergrond.png": {
         "doc": "achtergrond"
+    },
+    "profile": {
+        "doc": "editprofile",
+        "title": "Edit Profile"
     }
 }
