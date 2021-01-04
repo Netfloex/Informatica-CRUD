@@ -3,8 +3,7 @@
         <div id="author-wrap" class="uk-container uk-container-small">
             <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle" data-uk-grid="">
                 <div class="uk-width-auto uk-first-column">
-                    <img src="https://unsplash.it/seed/<?= $_SESSION["account"]["username"] ?>/80/80/" alt=""
-                        class="uk-border-circle">
+                    <img src="https://unsplash.it/seed/<?= $_SESSION["account"]["username"] ?>/80/80/" alt="" class="uk-border-circle">
                 </div>
                 <div class="uk-width-auto">
                     <h4 class="uk-margin-remove uk-text-bold"><?= $_SESSION["account"]["username"] ?></h4>
@@ -42,8 +41,7 @@
                     <div class="uk-first-column">
                         <div class="uk-margin-medium">
                             <label class="uk-form-label" for="usernameI">Username </label>
-                            <input name="username" class="uk-input <?= errorClass("username") ?>" id="usernameI"
-                                type="text" value="<?= $_SESSION["account"]["username"] ?>">
+                            <input name="username" class="uk-input <?= errorClass("username") ?>" id="usernameI" type="text" value="<?= $_SESSION["account"]["username"] ?>">
                             <?= errorMsg("username") ?>
                         </div>
                     </div>
@@ -52,8 +50,7 @@
                         <div class="uk-margin-medium">
                             <label class="uk-form-label" for="emailI">Email Address </label>
                             <input name="email" class="uk-input 
-                            <?= errorClass("email") ?>" id="emailI" type="text"
-                                value="<?= $_SESSION["account"]["email"] ?>">
+                            <?= errorClass("email") ?>" id="emailI" type="text" value="<?= $_SESSION["account"]["email"] ?>">
 
                             <?= errorMsg("email") ?>
                         </div>
@@ -65,6 +62,7 @@
                     <label class="uk-form-label" for="countryI">Country </label>
                     <select name="country" class="uk-select" id="countryI">
                         <?php include jPath("elements/countryoptions.html") ?>
+
                     </select>
                 </div>
                 <div class="uk-margin-small">
@@ -73,8 +71,7 @@
                 </div>
                 <div class="uk-margin-small">
                     <label class="uk-form-label" for="addressI">Bio </label>
-                    <textarea name="bio" class="uk-textarea" placeholder="Tell us a little bit about yourself"
-                        id="addressI" type="text"></textarea>
+                    <textarea name="bio" class="uk-textarea" placeholder="Tell us a little bit about yourself" id="addressI" type="text"></textarea>
                 </div>
                 <input type="submit" value="Update Profile" class="uk-button">
             </form>
