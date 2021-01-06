@@ -49,7 +49,8 @@ class DB {
      */
 
     public function checkIfSet(array $array, bool $ignore_length) {
-        foreach ($array as $i => $item) {
+
+        foreach ($array as $item) {
             if (!isset($_POST[$item]) || (strlen($_POST[$item]) < 3 && !$ignore_length)) {
                 $this->goBack($item, "is te kort");
             }
@@ -140,6 +141,22 @@ class DB {
         if ($is_logged_in) {
             header("Location: /u/{$_SESSION['account']['username']}");
         }
+    }
+
+    /**
+     * Update je eigen profiel in de database
+     * @param array $p Post data van de request
+     */
+
+    public function update_profile(array $p) {
+        $p["username"] = str_replace(" ", "_", $p["username"]);
+        $insert_details = $this->connection->prepare("UPDATE accounts SET firstname=?, lastname=?, country=?, address=?, bio=?, username=?, email=? WHERE id=?");
+        $insert_details->bind_param("sssssssi", $p["firstname"], $p["lastname"], $p["country"], $p["address"], $p["bio"], $p["username"], $p["email"], $_SESSION["account"]["id"]);
+
+        $insert_details->execute();
+
+        $account = $this->account_from("id", $_SESSION["account"]["id"]);
+        $_SESSION["account"] = $account;
     }
 }
 

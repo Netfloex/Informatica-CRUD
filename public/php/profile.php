@@ -14,3 +14,6 @@ $db->checkIfSet([
     "username",
     "email",
 ], false);
+
+$p = $_POST;
+$db->update_profile($p);

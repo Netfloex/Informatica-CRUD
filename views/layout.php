@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
     <link rel="stylesheet" href="/css/uikit.min.css">
-    <link rel="stylesheet" href="/css/index.min.css">
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 
-<body class="<?= $doc?>">
+<body class="<?= $doc ?>">
     <?php
     include jPath("elements/navbar.php");
     include $document;
