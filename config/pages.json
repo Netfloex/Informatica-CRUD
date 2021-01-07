@@ -19,5 +19,9 @@
     "profile": {
         "doc": "editprofile",
         "title": "Edit Profile"
+    },
+    "logout": {
+        "doc": "logout",
+        "title": "Logging Out!"
     }
 }

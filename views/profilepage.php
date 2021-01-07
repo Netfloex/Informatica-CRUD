@@ -4,18 +4,32 @@ $view_account = $db->account_from("username", $req);
 <div class="page">
     <section class="uk-section uk-section-small">
         <div id="author-wrap" class="uk-container uk-container-small">
-            <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle" data-uk-grid="">
+            <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle uk-position-relative" data-uk-grid="">
                 <div class="uk-width-auto uk-first-column">
-                    <img src="https://unsplash.it/seed/<?= $view_account["username"] ?>/80/80/" alt=""
-                        class="uk-border-circle">
+                    <img width="80" height="80" src="https://picsum.photos/seed/<?= $view_account["username"] ?>/80/80/"
+                        alt="" class="uk-border-circle">
                 </div>
                 <div class="uk-width-auto">
-                    <h4 class="uk-margin-remove uk-text-bold"><?= $view_account["username"] ?></h4>
-                    <span class="uk-text-small uk-text-muted"><?= $view_account["email"] ?></span>
+                    <h4 class="uk-margin-remove uk-text-bold">
+                        <?= $view_account["firstname"] . " " . $view_account["lastname"]  ?>
+                    </h4>
+                    <a class="uk-text-small uk-text-muted" href="mailto:<?= $view_account["email"] ?>">
+                        <?= $view_account["email"] ?>
+                    </a>
+                    <br>
+                    <br>
+                    <h5 class="uk-margin-remove uk-text-bold">
+                        <?= $view_account["username"] ?>
+                    </h5>
+                    <h6 class="uk-margin-remove uk-text-bold">
+                        <?= $view_account["address"] ?>
+                    </h6>
+                    <br>
                 </div>
                 <?php if ($is_logged_in && $view_account["id"] == $_SESSION["account"]["id"]) : ?>
                 <div class="uk-width-expand">
-                    <a href="/profile" class="uk-button">Edit Profile</a>
+                    <a href="/logout" class="uk-button uk-float-right">Logout</a>
+                    <a href="/profile" class="uk-button uk-float-right">Edit Profile</a>
                 </div>
                 <?php endif; ?>
                 <div class="uk-width-auto">
@@ -36,19 +50,17 @@ $view_account = $db->account_from("username", $req);
                         </div>
                     </div>
                 </div>
+                <div class="uk-position-absolute uk-position-bottom-right">
+                    <h6>
+                        Geregistreerd op: <?= $view_account["reg_date"] ?>
+                    </h6>
+                </div>
             </div>
+            <hr>
+            <p>
+                <?= str_replace("\n", "<br>", $view_account["bio"]) ?>
+            </p>
+
         </div>
     </section>
-    <div class="uk-container uk-container-small">
-        <hr class="uk-margin-remove">
-    </div>
-    <ul>
-        <?php
-        foreach ($view_account as $key => $item) :
-        ?>
-        <li>
-            <?= $key . ": " . $item ?>
-        </li>
-        <?php endforeach; ?>
-    </ul>
 </div>

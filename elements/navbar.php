@@ -29,8 +29,7 @@
                 <span class="navbar-toggler-bar bottom-bar"></span>
             </button>
         </div>
-        <div class="collapse navbar-collapse justify-content-end" id="navigation"
-            data-nav-image="../assets/img/blurred-image-1.jpg">
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
                 <?php if ($is_logged_in) : ?>
                 <li class="nav-item">

@@ -24,11 +24,14 @@ class DB {
      * @param String $type Het type, dus email, username of password
      * @param String $msg Wat er mis is met 
      */
-    public function goBack($type, $msg) {
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $referer = $_SERVER['HTTP_REFERER'];
+    public function goBack($type = false, $msg = false) {
+        $referer = $_SERVER['HTTP_REFERER'];
+        if (isset($referer)) {
             $referer = preg_replace("/\?.*/", "", $referer);
-            header("Location: $referer?error=$type&msg=$msg");
+            if ($type) {
+                $referer .= "?error=$type&msg=$msg";
+            }
+            header("Location: $referer");
         } else {
             header("Location: /");
         }
@@ -95,6 +98,10 @@ class DB {
      * 
      */
     public function register($email, $username, $password) {
+        error_log($email);
+        error_log($username);
+        error_log($password);
+        error_log("done");
         $password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->connection->prepare("INSERT INTO accounts (email, username, password) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $email, $username, $password);
@@ -104,13 +111,14 @@ class DB {
     /**
      * Maakt een user pagina als de user bestaat
      * @param String $user username
-     * @return $page;
+     * @return page $page;
      */
 
     public function user_page($user) {
-        if ($this->check_exist("username", $user)) {
+        $acc = $this->account_from("username", $user);
+        if ($acc != null) {
             $page = json_decode('{
-                "title": "' . $user . '",
+                "title": "' . $acc["username"] . '",
                 "doc": "profilepage"
             }');
         } else {
@@ -124,6 +132,7 @@ class DB {
 
     /**
      * Wat er moet gebeuren na een inlog/registratie
+     * @param account $account;
      */
 
     public function logged_on($account) {
@@ -139,7 +148,7 @@ class DB {
     public function redirect_if_logged_in() {
         global $is_logged_in;
         if ($is_logged_in) {
-            header("Location: /u/{$_SESSION['account']['username']}");
+            redirect_to("/u/{$_SESSION['account']['username']}");
         }
     }
 

@@ -17,3 +17,4 @@ $db->checkIfSet([
 
 $p = $_POST;
 $db->update_profile($p);
+$db->goBack();
