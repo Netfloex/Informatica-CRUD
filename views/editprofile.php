@@ -105,6 +105,13 @@ function add_value(String $val) {
                         type="text"><?= $_SESSION["account"]["bio"] ?></textarea>
                 </div>
                 <input type="submit" value="Update Profile" class="uk-button">
+                <a type="submit" class="uk-button uk-button-danger uk-float-right" id="deleteaccountbutton">Delete
+                    Account</a>
+                <script>
+                document.querySelector("#deleteaccountbutton").addEventListener("click", () => {
+                    if (confirm("Weet je het zeker?")) location.href = "/deleteaccount";
+                })
+                </script>
             </form>
         </div>
     </div>

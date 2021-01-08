@@ -64,7 +64,7 @@ class DB {
      * Haalt een account op van de database.
      * @param String $type email of username of id
      * @param String $var de variabele van boven 
-     * @return $account;
+     * @return array $account;
      */
 
     public function account_from($type, $var) {
@@ -98,10 +98,6 @@ class DB {
      * 
      */
     public function register($email, $username, $password) {
-        error_log($email);
-        error_log($username);
-        error_log($password);
-        error_log("done");
         $password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->connection->prepare("INSERT INTO accounts (email, username, password) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $email, $username, $password);
@@ -109,9 +105,21 @@ class DB {
     }
 
     /**
+     * Verwijderd het account uit de database en logt dan uit;
+     * @param array $account Het account dat word verwijderd
+     */
+
+    public function delete_account($account) {
+        $stmt = $this->connection->prepare("DELETE FROM `accounts` WHERE `accounts`.`id` = ?");
+        $stmt->bind_param("i", $account["id"]);
+        $stmt->execute();
+        redirect_to("/logout");
+    }
+
+    /**
      * Maakt een user pagina als de user bestaat
      * @param String $user username
-     * @return page $page;
+     * @return array $page;
      */
 
     public function user_page($user) {

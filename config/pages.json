@@ -1,27 +1,31 @@
 {
-    "/": {
-        "title": "Main",
-        "doc": "index"
-    },
-    "notFound": {
-        "title": "404, not found",
-        "doc": "404"
-    },
-    "register": {
-        "title": "Register"
-    },
-    "login": {
-        "title": "Login"
-    },
-    "img/achtergrond.png": {
-        "doc": "achtergrond"
-    },
-    "profile": {
-        "doc": "editprofile",
-        "title": "Edit Profile"
-    },
-    "logout": {
-        "doc": "logout",
-        "title": "Logging Out!"
-    }
+	"/": {
+		"title": "Main",
+		"doc": "index"
+	},
+	"notFound": {
+		"title": "404, not found",
+		"doc": "404"
+	},
+	"register": {
+		"title": "Register"
+	},
+	"login": {
+		"title": "Login"
+	},
+	"img/achtergrond.png": {
+		"doc": "achtergrond"
+	},
+	"profile": {
+		"doc": "editprofile",
+		"title": "Edit Profile"
+	},
+	"logout": {
+		"doc": "logout",
+		"title": "Logging Out!"
+	},
+	"deleteaccount": {
+		"doc": "deleteaccount",
+		"title": "Goodbye!"
+	}
 }
