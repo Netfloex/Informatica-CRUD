@@ -1,18 +1,52 @@
-.index {
-    .page-header {
-        &-image {
-            background         : linear-gradient(#838689, #111214);
-            background-image   : url('https://cdn.discordapp.com/attachments/783777988755587143/783778081017167922/achtergrond.png');
-            background-position: center center;
-            z-index            : 0 !important;
-        }
+@import "uikit";
 
-        h1.title {
-            color: white;
-        }
-    }
+.index {
+	.page-header {
+		&-image {
+			background: linear-gradient(#838689, #111214);
+			background-image: url("https://cdn.discordapp.com/attachments/783777988755587143/783778081017167922/achtergrond.png");
+			background-position: center center;
+			z-index: 0 !important;
+		}
+
+		h1.title {
+			color: white;
+		}
+	}
 }
 
 .page {
-    margin-top: 12rem;
+	margin-top: 12rem;
+}
+
+.profile-picture,
+.pfp-overlay,
+.pfp-form {
+	height: 5rem;
+	width: 5rem;
+	border-radius: 50%;
+}
+
+.pfp-overlay {
+	opacity: 0;
+	position: absolute;
+	z-index: 5;
+	right: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 40px rgba(0, 0, 0, 0.4) inset;
+	cursor: pointer;
+}
+
+.profile-picture:hover + .pfp-overlay,
+.pfp-overlay:hover {
+	opacity: 1;
+}
+.ctc {
+	font-size: 0.85rem;
+	color: white;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }

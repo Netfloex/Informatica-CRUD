@@ -1,0 +1,5 @@
+{
+	"scripts": {
+		"sass": "rm public/css/*&&sass scss/index.scss:public/css/app.css --style=compressed --watch --no-source-map"
+	}
+}

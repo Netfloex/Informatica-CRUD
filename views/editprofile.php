@@ -5,10 +5,11 @@ if (!$is_logged_in) {
 
 /**
  * Geeft een value attribuut terug met de data
+ * @param String $type Het type
  * @return String 
  */
-function add_value(String $val) {
-    $value = $_SESSION["account"][$val];
+function add_value(String $type) {
+    $value = $_SESSION["account"][$type];
     return "value=\"$value\"";
 }
 ?>
@@ -17,12 +18,25 @@ function add_value(String $val) {
         <div id="author-wrap" class="uk-container uk-container-small">
             <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle" data-uk-grid="">
                 <div class="uk-width-auto uk-first-column">
-                    <img src="https://unsplash.it/seed/<?= $_SESSION["account"]["username"] ?>/80/80/" alt=""
-                        class="uk-border-circle">
+                    <form action="/php/profilepicture.php" method="post" id="profile-picture"
+                        enctype="multipart/form-data" class="uk-position-relative">
+                        <img class="uk-display-inline uk-border-circle profile-picture" width="80" height="80"
+                            src="<?= $_SESSION["account"]["profile_picture"] ?? "https://picsum.photos/seed/{$_SESSION["account"]["username"]}/80/80/" ?>"
+                            alt="">
+                        <label for="upload-pfp" class="pfp-overlay text-center align-items-center">
+                            <span class="ctc">
+                                Click to change
+                            </span>
+                        </label>
+                        <input onchange="window['profile-picture'].submit()" type="file" name="profilepicture"
+                            class="uk-hidden" id="upload-pfp" accept="image/*">
+                    </form>
                 </div>
                 <div class="uk-width-auto">
                     <h4 class="uk-margin-remove uk-text-bold"><?= $_SESSION["account"]["username"] ?></h4>
                     <span class="uk-text-small uk-text-muted"><?= $_SESSION["account"]["email"] ?></span>
+                    <br>
+                    <?= errorMsg("image") ?>
                 </div>
             </div>
         </div>

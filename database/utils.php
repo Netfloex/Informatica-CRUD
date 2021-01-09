@@ -175,6 +175,14 @@ class DB {
         $account = $this->account_from("id", $_SESSION["account"]["id"]);
         $_SESSION["account"] = $account;
     }
+
+
+    public function update_picture(String $base64 = null) {
+        $update_picture = $this->connection->prepare("UPDATE accounts SET profile_picture=? WHERE id=?");
+        $update_picture->bind_param("si", $base64, $_SESSION["account"]["id"]);
+        $update_picture->execute();
+        $_SESSION["account"]["profile_picture"] = $base64;
+    }
 }
 
 /**
@@ -185,4 +193,32 @@ class DB {
 function redirect_to(String $url) {
     header("Location: $url");
     exit;
+}
+
+/**
+ * Als $type momenteel een error geeft, geef dan error class terug
+ * @param String $type email, username, image
+ * @return String? "uk-form-danger" || null
+ */
+
+function errorClass($type) {
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == $type) {
+            return "uk-form-danger";
+        }
+    }
+}
+
+/**
+ * Als $type momenteel een error geeft, geef dan error bericht terug
+ * @param String $type email, username, image
+ * @return String? "error msg" || null
+ */
+
+function errorMsg($type) {
+    if (isset($_GET["error"]) && isset($_GET["msg"])) {
+        if ($_GET["error"] == $type) {
+            return "<span class=\"uk-text-danger\">" . ucfirst($type) . " " . $_GET["msg"] . "</span>";
+        }
+    }
 }

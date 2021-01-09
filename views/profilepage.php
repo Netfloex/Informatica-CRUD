@@ -6,7 +6,8 @@ $view_account = $db->account_from("username", $req);
         <div id="author-wrap" class="uk-container uk-container-small">
             <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle uk-position-relative" data-uk-grid="">
                 <div class="uk-width-auto uk-first-column">
-                    <img width="80" height="80" src="https://picsum.photos/seed/<?= $view_account["username"] ?>/80/80/"
+                    <img width="80" height="80"
+                        src="<?= $view_account["profile_picture"] ?? "https://picsum.photos/seed/{$view_account["username"]}/80/80/" ?>"
                         alt="" class="uk-border-circle">
                 </div>
                 <div class="uk-width-auto">
