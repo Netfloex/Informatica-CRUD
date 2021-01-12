@@ -98,6 +98,9 @@ class DB {
      * 
      */
     public function register($email, $username, $password) {
+        $email = htmlspecialchars($email);
+        $username = htmlspecialchars($username);
+        $password = htmlspecialchars($password);
         $password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->connection->prepare("INSERT INTO accounts (email, username, password) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $email, $username, $password);
@@ -166,6 +169,7 @@ class DB {
      */
 
     public function update_profile(array $p) {
+        $p = array_map('htmlspecialchars', $p);
         $p["username"] = str_replace(" ", "_", $p["username"]);
         $insert_details = $this->connection->prepare("UPDATE accounts SET firstname=?, lastname=?, country=?, address=?, bio=?, username=?, email=? WHERE id=?");
         $insert_details->bind_param("sssssssi", $p["firstname"], $p["lastname"], $p["country"], $p["address"], $p["bio"], $p["username"], $p["email"], $_SESSION["account"]["id"]);
@@ -178,6 +182,7 @@ class DB {
 
 
     public function update_picture(String $base64 = null) {
+        $base64 = htmlspecialchars($base64);
         $update_picture = $this->connection->prepare("UPDATE accounts SET profile_picture=? WHERE id=?");
         $update_picture->bind_param("si", $base64, $_SESSION["account"]["id"]);
         $update_picture->execute();
