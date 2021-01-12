@@ -6,7 +6,9 @@
 			background: linear-gradient(#838689, #111214);
 			background-image: url("https://cdn.discordapp.com/attachments/783777988755587143/783778081017167922/achtergrond.png");
 			background-position: center center;
+			background-size: cover;
 			z-index: 0 !important;
+			background-repeat: no-repeat;
 		}
 
 		h1.title {

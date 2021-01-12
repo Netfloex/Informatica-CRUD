@@ -180,13 +180,29 @@ class DB {
         $_SESSION["account"] = $account;
     }
 
-
+    /**
+     * Update je profielfoto in de database
+     * @param String $base64 base64 encoded image
+     */
     public function update_picture(String $base64 = null) {
         $base64 = htmlspecialchars($base64);
         $update_picture = $this->connection->prepare("UPDATE accounts SET profile_picture=? WHERE id=?");
         $update_picture->bind_param("si", $base64, $_SESSION["account"]["id"]);
         $update_picture->execute();
         $_SESSION["account"]["profile_picture"] = $base64;
+    }
+
+    /**
+     * Haalt alle users uit de database
+     * @param int $max Hoeveel
+     * @return array Lijst van de users
+     */
+    public function all_users(int $max = 10) {
+        $sql = $this->connection->prepare('SELECT * FROM `accounts` WHERE firstname != "" LIMIT ?');
+        $sql->bind_param("i", $max);
+        $sql->execute();
+        $result = $sql->get_result();
+        return $result->fetch_all();
     }
 }
 
