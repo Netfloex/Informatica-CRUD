@@ -53,6 +53,9 @@ $view_account = $db->account_from("username", $req);
                 </div>
                 <div class="uk-position-absolute uk-position-bottom-right">
                     <h6>
+                        Laatst gezien: <?= $db->last_online($view_account["username"]) ?>
+                    </h6>
+                    <h6>
                         Geregistreerd op: <?= $view_account["reg_date"] ?>
                     </h6>
                 </div>

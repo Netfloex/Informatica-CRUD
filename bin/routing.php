@@ -14,7 +14,7 @@ if (preg_match("/^u\//", $req) == 1) { // Pagina die begint met "u/" -> Profiel 
 } else if (isset($pages->$req)) {
     $page = $pages->$req;
 } else {
-    header("HTTP/1.0 404 Not Found");
+    die(header("HTTP/1.0 404 Not Found"));
     $page = $pages->notFound;
 }
 
@@ -24,3 +24,6 @@ $doc = isset($page->doc) ? $page->doc : $req;
 $document = jPath("{$paths->views}/$doc.php");
 
 include jPath("{$paths->views}/layout.php");
+
+// Logging
+$db->log_request($_SERVER);

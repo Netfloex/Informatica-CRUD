@@ -31,9 +31,9 @@ class DB {
             if ($type) {
                 $referer .= "?error=$type&msg=$msg";
             }
-            header("Location: $referer");
+            die(header("Location: $referer"));
         } else {
-            header("Location: /");
+            die(header("Location: /"));
         }
         exit;
     }
@@ -204,6 +204,35 @@ class DB {
         $result = $sql->get_result();
         return $result->fetch_all();
     }
+
+    /**
+     * Logt een request in de database
+     * @param $_SERVER $req Object met data
+     */
+    public function log_request($req) {
+        $url = "http://$req[HTTP_HOST]$req[REQUEST_URI]";
+        $useragent = $req["HTTP_ACCEPT_LANGUAGE"];
+        $ip = $req["HTTP_X_FORWARDED_FOR"] ?? $req["REMOTE_ADDR"];
+        $referer = $req["HTTP_REFERER"] ?? "";
+        $accept = $req["HTTP_ACCEPT"];
+        $username = $_SESSION["account"]["username"] ?? "";
+        $stmt = $this->connection->prepare("INSERT INTO requests (url, `user-agent`, ip, referer, accept, username) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $url, $useragent, $ip, $referer, $accept, $username);
+        $stmt->execute();
+    }
+
+    /**
+     * Bekijkt wanneer username voor het laatst online was
+     * @param string $username Wie?
+     * @return string Timestamp van laatst online
+     */
+    public function last_online(string $username) {
+        $sql = $this->connection->prepare('SELECT `timestamp` FROM `requests` WHERE `username` = ? ORDER BY `id` DESC  LIMIT 1');
+        $sql->bind_param("s", $username);
+        $sql->execute();
+        $result = $sql->get_result();
+        return $result->fetch_object()->timestamp;
+    }
 }
 
 /**
@@ -212,7 +241,7 @@ class DB {
  */
 
 function redirect_to(String $url) {
-    header("Location: $url");
+    die(header("Location: $url"));
     exit;
 }
 

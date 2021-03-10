@@ -16,9 +16,7 @@
         <div>
             <?php
             $users = $db->all_users(22);
-            jsDump($users);
             foreach ($users as $user) :
-                jsDump($user);
             ?>
             <a href="/u/<?= $user[3] ?>"><?= $user[0] ?> <?= $user[1] ?></a>
 

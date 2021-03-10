@@ -13,8 +13,10 @@ $password = $_POST["password"];
 
 if (!$db->check_exist("email", $email)) {
     if (!$db->check_exist("username", $username)) {
-        $db->register($email, $username, $password);
-        $account = $db->account_from("username", $username);
+        if (isset($_COOKIE["PHPSESSID"])) { // Als je nog niet op een andere pagina bent geweest doe het niet toevoegen aan de database.
+            $db->register($email, $username, $password);
+            $account = $db->account_from("username", $username);
+        }
         $db->logged_on($account);
     } else {
         $db->goBack("username", "is al in gebruik.");
