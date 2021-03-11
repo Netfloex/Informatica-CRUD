@@ -231,7 +231,11 @@ class DB {
         $sql->bind_param("s", $username);
         $sql->execute();
         $result = $sql->get_result();
-        return $result->fetch_object()->timestamp;
+        $obj = $result->fetch_object();
+        if (isset($obj)) {
+            return $obj->timestamp;
+        }
+        return "Nog Niet?";
     }
 
     /**
