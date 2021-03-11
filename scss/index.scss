@@ -16,6 +16,29 @@
 		}
 	}
 }
+.profilepage {
+	.padding-bottom {
+		padding-bottom: 10px;
+	}
+	.editableform {
+		max-width: 50%;
+		.editable {
+			border: none;
+		}
+		&:hover,
+		&:focus {
+			.editable {
+				border: 1px solid #e5e5e5;
+			}
+			input[type="submit"] {
+				display: block;
+			}
+		}
+		input[type="submit"] {
+			display: none;
+		}
+	}
+}
 
 .page {
 	margin-top: 12rem;

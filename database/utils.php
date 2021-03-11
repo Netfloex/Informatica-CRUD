@@ -233,6 +233,50 @@ class DB {
         $result = $sql->get_result();
         return $result->fetch_object()->timestamp;
     }
+
+    /**
+     * Voegt een post toe van een user
+     * @param int $id Wie?
+     * @param string $title Titel van de post
+     * @param string $content Content van de post
+     */
+    public function add_post(int $id, string $title, string $content) {
+        $title = htmlspecialchars($title);
+        $content = htmlspecialchars($content);
+        $stmt = $this->connection->prepare("INSERT INTO posts (userid, title, content) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $id, $title, $content);
+        $stmt->execute();
+        $this->goBack();
+    }
+
+
+    /**
+     * Krijgt alle posts van een user
+     * @param int $id Wie?
+     * @return string Timestamp van laatst online
+     */
+    public function user_posts(int $userid, int $max = 10) {
+        $sql = $this->connection->prepare('SELECT `title`, `content`, `timestamp`, `id` FROM `posts` WHERE `userid` = ? LIMIT ?');
+        $sql->bind_param("ii", $userid, $max);
+        $sql->execute();
+        $result = $sql->get_result();
+        return $result->fetch_all();
+    }
+
+    /**
+     * Edit een post van een user
+     * @param int $id Id van de post?
+     * @param string $title Titel van de post
+     * @param string $content Content van de post
+     */
+    public function edit_post(int $id, string $title, string $content) {
+        $title = htmlspecialchars($title);
+        $content = htmlspecialchars($content);
+        $stmt = $this->connection->prepare("UPDATE `posts` SET `title` = ?, `content` = ? WHERE `posts`.`id` = ?;");
+        $stmt->bind_param("ssi", $title, $content, $id);
+        $stmt->execute();
+        $this->goBack();
+    }
 }
 
 /**
